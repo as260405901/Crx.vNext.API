@@ -4,7 +4,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 
-namespace NationalCompetitionRegistration.Extensions
+namespace Crx.vNext.Framework.Extensions
 {
     /// <summary>
     /// Swagger接口文档配置

@@ -5,15 +5,15 @@ VisualStudioVersion = 16.0.31004.235
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crx.vNext.API", "Crx.vNext.API\Crx.vNext.API.csproj", "{ACAA3670-8963-4C18-A754-E7D4DD4F3259}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crx.vNext.Model", "Crx.vNext.Model\Crx.vNext.Model.csproj", "{B1169526-A668-4892-A5F1-58043B4018B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crx.vNext.Model", "Crx.vNext.Model\Crx.vNext.Model.csproj", "{B1169526-A668-4892-A5F1-58043B4018B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crx.vNext.IRepository", "Crx.vNext.IRepository\Crx.vNext.IRepository.csproj", "{9B9099B4-EA91-485B-845F-2AD1D3215F1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crx.vNext.IRepository", "Crx.vNext.IRepository\Crx.vNext.IRepository.csproj", "{9B9099B4-EA91-485B-845F-2AD1D3215F1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crx.vNext.Repository", "Crx.vNext.Repository\Crx.vNext.Repository.csproj", "{0B1E78E6-4E8F-4BBB-844B-A8DC2983E9A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crx.vNext.Repository", "Crx.vNext.Repository\Crx.vNext.Repository.csproj", "{0B1E78E6-4E8F-4BBB-844B-A8DC2983E9A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crx.vNext.IService", "Crx.vNext.IService\Crx.vNext.IService.csproj", "{09895182-184C-479A-92CB-F098D9DFBE89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crx.vNext.IService", "Crx.vNext.IService\Crx.vNext.IService.csproj", "{09895182-184C-479A-92CB-F098D9DFBE89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crx.vNext.Service", "Crx.vNext.Service\Crx.vNext.Service.csproj", "{D988ADAA-593D-4ABE-B97A-47A5139A2E3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crx.vNext.Service", "Crx.vNext.Service\Crx.vNext.Service.csproj", "{D988ADAA-593D-4ABE-B97A-47A5139A2E3D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.Base", "0.Base", "{70905945-E3CA-45D3-9F4D-DA4870D6444C}"
 EndProject
@@ -23,11 +23,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Repository", "2.Repositor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Service", "3.Service", "{50CB6059-7782-42A7-A0AB-F0CFF84ED2AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crx.vNext.Common", "Crx.vNext.Common\Crx.vNext.Common.csproj", "{CF77C791-77F4-45AF-A291-3946448CDA67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crx.vNext.Common", "Crx.vNext.Common\Crx.vNext.Common.csproj", "{CF77C791-77F4-45AF-A291-3946448CDA67}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Framework", "4.Framework", "{59D5A9FE-702C-4A55-A334-6A7172ED8944}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crx.vNext.Framework", "Crx.vNext.Framework\Crx.vNext.Framework.csproj", "{68C2766F-6847-4A4F-86ED-ED8385EA3FF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crx.vNext.Framework", "Crx.vNext.Framework\Crx.vNext.Framework.csproj", "{68C2766F-6847-4A4F-86ED-ED8385EA3FF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:17687/Swagger",
+      "applicationUrl": "http://localhost:17687",
       "sslPort": 0
     }
   },
@@ -11,6 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
+      "launchUrl": "Swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -18,10 +19,11 @@
     "Crx.vNext.API": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "Swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+      "applicationUrl": "http://localhost:5000"
     }
   }
 }

@@ -14,8 +14,8 @@ namespace Crx.vNext.API
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-                .UseSerilog()
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory()) // IOC容器更换为Autofac
+                .UseSerilog() // 集成Serilog
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

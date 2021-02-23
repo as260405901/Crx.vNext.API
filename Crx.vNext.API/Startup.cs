@@ -1,5 +1,6 @@
 using Autofac;
 using Crx.vNext.Common.Base;
+using Crx.vNext.Framework.Extensions;
 using Crx.vNext.Framework.Filter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,7 +12,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using NationalCompetitionRegistration.Extensions;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -39,26 +39,19 @@ namespace Crx.vNext.API
             services.AddSingleton(new Appsettings(Configuration));
 
             // 是否开启同步
-            if (Appsettings.GetBool("AllowSync") ?? false)
+            if (Appsettings.GetBool(new[] { "SystemFrame", "AllowSync" }) ?? false)
             {
                 services.Configure<KestrelServerOptions>(x => x.AllowSynchronousIO = true)
                         .Configure<IISServerOptions>(x => x.AllowSynchronousIO = true);
             }
-
             services.AddSwaggerSetup();
-            services.AddControllers(options =>
-            {
-                // 相同类型过滤器实现 IOrderedFilter 接口来调整执行顺序，从小到大执行
-                // 全局请求参数校验过滤器
-                options.Filters.Add(typeof(GlobalRequestParameterVerificationFilter));
-                // 全局异常过滤器
-                options.Filters.Add(typeof(GlobalExceptionsFilter));
-            });
+            services.AddControllerSetup();
         } 
         
         // Autofac容器
         public void ConfigureContainer(ContainerBuilder builder)
-        { 
+        {
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

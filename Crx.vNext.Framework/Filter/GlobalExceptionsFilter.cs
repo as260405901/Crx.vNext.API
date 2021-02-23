@@ -19,8 +19,7 @@ namespace Crx.vNext.Framework.Filter
         {
             context.ExceptionHandled = true;
             _logger.LogError(context.Exception.Message, context.Exception);
-            context.Result = new JsonResult(context.Exception.Message);
-            
+            context.Result = MsgResponse.Error(MsgErrorEnum.UnknownException, context.Exception.Message);            
         }
     }
 }

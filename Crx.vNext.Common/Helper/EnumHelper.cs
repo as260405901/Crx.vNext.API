@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using Microsoft.OpenApi.Extensions;
 using System.ComponentModel;
-using System.Reflection;
-using System.Text;
 
 namespace Crx.vNext.Common.Helper
 {
@@ -16,20 +14,7 @@ namespace Crx.vNext.Common.Helper
         /// </summary>
         public static string GetDescription(this Enum value)
         {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
-            if (fi == null)
-            {
-                return value.ToString();
-            }
-            object[] attributes = fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
-            if (attributes.Length > 0)
-            {
-                return ((DescriptionAttribute)attributes[0]).Description;
-            }
-            else
-            {
-                return value.ToString();
-            }
+            return value.GetAttributeOfType<DescriptionAttribute>().Description;
         }
     }
 }

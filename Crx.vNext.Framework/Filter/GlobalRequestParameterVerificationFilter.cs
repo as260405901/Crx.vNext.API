@@ -20,12 +20,14 @@ namespace Crx.vNext.Framework.Filter
             if (!context.ModelState.IsValid)
             {
                 var validate = new BadRequestObjectResult(context.ModelState).Value as Dictionary<string, object>;
+                // 请求参数不能为空
                 if (validate.Count == 1 && validate.ContainsKey(string.Empty))
                 {
-                    context.Result = new JsonResult(validate);
+                    context.Result = MsgResponse.Error(MsgErrorEnum.RequestParameterCannotEmpty);
                     return;
                 }
-                context.Result = new JsonResult(validate);
+                // 请求参数校验失败
+                context.Result = MsgResponse.Error(MsgErrorEnum.RequestParameterVerificationFailed, validate);
             }
         }
     }
