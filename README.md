@@ -1,9 +1,9 @@
 # Crx.vNext.API 微服务架构
 
 ## 特点
-全局使用性能更高的 System.Text.Json
-统一的接口响应格式
-已集成AutoFac、Serilog、Swagger、Automapper 
+#### 全局使用性能更高的 System.Text.Json
+#### 统一的接口响应格式
+#### 已集成AutoFac、Serilog、Swagger、Automapper 
 
 
 ## 预计集成功能
