@@ -2,6 +2,9 @@ using Autofac;
 using Crx.vNext.Common.Base;
 using Crx.vNext.Framework.Extensions;
 using Crx.vNext.Framework.Filter;
+using Crx.vNext.Model;
+using Crx.vNext.Model.Enum;
+using Crx.vNext.Model.InputModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -15,7 +18,10 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Crx.vNext.API
@@ -32,18 +38,13 @@ namespace Crx.vNext.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            #region Serilog
-            Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(Configuration).CreateLogger();
-            #endregion
-            
-            services.AddSingleton(new Appsettings(Configuration));
+            /*** 优先 ***/
+            _ = new Appsettings(Configuration);
+            Configuration.AddSerilogSetup();
 
-            // 是否开启同步
-            if (Appsettings.GetBool(new[] { "SystemFrame", "AllowSync" }) ?? false)
-            {
-                services.Configure<KestrelServerOptions>(x => x.AllowSynchronousIO = true)
-                        .Configure<IISServerOptions>(x => x.AllowSynchronousIO = true);
-            }
+            /*** 注入各类服务 ***/
+            services.AddServerOptionsSetup();
+            services.AddAutoMapperSetup();
             services.AddSwaggerSetup();
             services.AddControllerSetup();
         } 
@@ -51,7 +52,23 @@ namespace Crx.vNext.API
         // Autofac容器
         public void ConfigureContainer(ContainerBuilder builder)
         {
+            /*
+            builder.RegisterType<SqlConnection>().As<IDbConnection>()
+                .WithParameter("connectionString", Configuration.GetConnectionString("DefaultConnection"));
 
+            //注册要通过反射创建的组件
+            var assemblyService = Assembly.LoadFrom(Path.Combine(AppContext.BaseDirectory, "NCR.Service.dll"));
+            builder.RegisterAssemblyTypes(assemblyService)
+                .AsImplementedInterfaces() // 接口注入
+                .InstancePerDependency();
+            var assemblyRepository = Assembly.LoadFrom(Path.Combine(AppContext.BaseDirectory, "NCR.Repository.dll"));
+            builder.RegisterAssemblyTypes(assemblyRepository)
+                .AsImplementedInterfaces()
+                .InstancePerDependency();
+            builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerDependency();//泛型注入
+
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope(); // 工作单元注入为Scope
+            */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,7 +90,7 @@ namespace Crx.vNext.API
             // 然后是授权中间件
             //app.UseAuthorization();
 
-            app.UseSerilogRequestLogging(); // 需要详细日志时，将 Microsoft 设置为 Information
+            app.UseSerilogSetup();
 
             app.UseEndpoints(endpoints =>
             {

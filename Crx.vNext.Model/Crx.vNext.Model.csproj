@@ -14,9 +14,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Crx.vNext.Model.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Dapper" Version="2.0.78" />
     <PackageReference Include="Dapper.SimpleCRUD" Version="2.2.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="5.0.1" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
 

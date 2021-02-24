@@ -1,5 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Crx.vNext.Common.Base;
+using Crx.vNext.Common.Helper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
+using Serilog;
+using System.Collections.Generic;
+using System.Text.Json;
 
 namespace Crx.vNext.Framework.Filter
 {
@@ -9,6 +15,12 @@ namespace Crx.vNext.Framework.Filter
     /// </summary>
     public class GlobalResultFilter : IResultFilter
     {
+        private readonly ILogger<GlobalResultFilter> _logger;
+        public GlobalResultFilter(ILogger<GlobalResultFilter> logger)
+        {
+            _logger = logger;
+        }
+
         public void OnResultExecuted(ResultExecutedContext context)
         {
 
@@ -18,20 +30,35 @@ namespace Crx.vNext.Framework.Filter
         {
             if (context.Result is ObjectResult)
             {
-                var result = (ObjectResult)context.Result;
-                if(result.StatusCode == 200)
+                var result = context.Result as ObjectResult;
+                if(result.Value is MessageResponse)
                 {
-                    context.Result = MsgResponse.Ok(result.Value);
+                    return;
                 }
-                else if(result.StatusCode == 400)
+                if(result.StatusCode == 200 || result.StatusCode == null)
                 {
-                    context.Result = MsgResponse.Error(MsgErrorEnum.BadRequest);
+                    context.Result = new JsonResult(MessageResponse.Ok(result.Value));
+                    if (result.Value is string)
+                    {
+                        _logger.LogWarning("【不规范的出参】 " + result.Value);
+                    }
+                    else
+                    {
+                        _logger.LogWarning("【不规范的出参】 " + JsonHelper.Serialize(result.Value));
+                    }
+                    return;
+                }
+                if(result.StatusCode == 400)
+                {
+                    _logger.LogWarning("【不规范的出参】 400");
+                    context.Result = new JsonResult(MessageResponse.Error(MesssageErrorEnum.BadRequest));
                 }
                 return;
             }
             if(context.Result is EmptyResult || context.Result is OkResult)
             {
-                context.Result = MsgResponse.Ok();
+                _logger.LogInformation("【不规范的出参】 void");
+                context.Result = new JsonResult(MessageResponse.Ok());
             }
         }
     }

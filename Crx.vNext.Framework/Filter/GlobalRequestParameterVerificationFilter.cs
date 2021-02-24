@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Crx.vNext.Common.Base;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Collections.Generic;
 
@@ -23,11 +24,11 @@ namespace Crx.vNext.Framework.Filter
                 // 请求参数不能为空
                 if (validate.Count == 1 && validate.ContainsKey(string.Empty))
                 {
-                    context.Result = MsgResponse.Error(MsgErrorEnum.RequestParameterCannotEmpty);
+                    context.Result = new JsonResult(MessageResponse.Error(MesssageErrorEnum.RequestParameterCannotEmpty));
                     return;
                 }
                 // 请求参数校验失败
-                context.Result = MsgResponse.Error(MsgErrorEnum.RequestParameterVerificationFailed, validate);
+                context.Result = new JsonResult(MessageResponse.Error(MesssageErrorEnum.RequestParameterVerificationFailed, validate));
             }
         }
     }

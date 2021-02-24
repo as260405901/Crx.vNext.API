@@ -15,7 +15,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <Compile Remove="log\**" />
+    <Content Remove="log\**" />
+    <EmbeddedResource Remove="log\**" />
+    <None Remove="log\**" />
   </ItemGroup>
 
   <ItemGroup>

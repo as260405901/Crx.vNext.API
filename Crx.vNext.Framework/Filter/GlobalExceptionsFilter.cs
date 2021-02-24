@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Crx.vNext.Common.Base;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 
@@ -19,7 +20,7 @@ namespace Crx.vNext.Framework.Filter
         {
             context.ExceptionHandled = true;
             _logger.LogError(context.Exception.Message, context.Exception);
-            context.Result = MsgResponse.Error(MsgErrorEnum.UnknownException, context.Exception.Message);            
+            context.Result = new JsonResult(MessageResponse.Error(MesssageErrorEnum.UnknownException, context.Exception.Message));            
         }
     }
 }
