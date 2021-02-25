@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -43,6 +44,7 @@ namespace Crx.vNext.API
             Configuration.AddSerilogSetup();
 
             /*** 注入各类服务 ***/
+            services.AddRedisSetup().Wait();
             services.AddServerOptionsSetup();
             services.AddAutoMapperSetup();
             services.AddSwaggerSetup();

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Crx.vNext.Common.Base;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
+using StackExchange.Redis;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,18 +23,30 @@ namespace Crx.vNext.API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ILogger<TestController> _logger;
+        private readonly IDatabase _redis;
 
-        public TestController(ILogger<TestController> logger, IMapper mapper)
+        public TestController(ILogger<TestController> logger, IMapper mapper, IDatabase redis)
         {
             _logger = logger;
             _mapper = mapper;
+            _redis = redis;
         }
         // GET: api/Test
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var a = 1;
-            return Ok(Appsettings.GetString(new [] { "ConnectionStrings", "WriteConnection" }));
+            var key = "aaa";
+            string aaa;            
+            if (await _redis.KeyExistsAsync(key))
+            {
+                aaa = await _redis.StringGetAsync("aaa");
+            }
+            else
+            {
+                aaa = "123";
+                await _redis.StringSetAsync("aaa", aaa);
+            }
+            return Ok(aaa);
         }
 
         // GET api/Test/5
