@@ -1,19 +1,18 @@
-﻿using Crx.vNext.IRepository.Base;
-using Crx.vNext.Model.DataModel;
+﻿using Crx.vNext.Model.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using Dapper;
 
-namespace Crx.vNext.Repository.Base
+namespace Crx.vNext.IRepository.Base
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseInfo
     {
         private readonly IUnitOfWork _unitOfWork;
-        private IDbConnection conn { get => _unitOfWork.GetConnection(); }
+        private IDbConnection conn { get => _unitOfWork.DbConnection; }
 
-        private IDbTransaction tran { get => _unitOfWork.GetTransaction(); }
+        private IDbTransaction tran { get => _unitOfWork.DbTransaction; }
 
         public BaseRepository(IUnitOfWork unitOfWork)
         {

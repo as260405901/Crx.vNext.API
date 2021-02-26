@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Crx.vNext.Common.Base
+namespace Crx.vNext.Common.Helper
 {
     /// <summary>
     /// 配置文件操作类
@@ -35,6 +35,32 @@ namespace Crx.vNext.Common.Base
         {
             var str = GetString(sections);
             if (str != null && bool.TryParse(str, out bool result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 字符串配置
+        /// </summary>
+        public static int? GetInt(params string[] sections)
+        {
+            var str = GetString(sections);
+            if (str != null && int.TryParse(str, out int result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 字符串配置
+        /// </summary>
+        public static long? GetLong(params string[] sections)
+        {
+            var str = GetString(sections);
+            if (str != null && long.TryParse(str, out long result))
             {
                 return result;
             }

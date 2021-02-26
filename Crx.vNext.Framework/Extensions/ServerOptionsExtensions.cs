@@ -1,4 +1,4 @@
-﻿using Crx.vNext.Common.Base;
+﻿using Crx.vNext.Common.Helper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;

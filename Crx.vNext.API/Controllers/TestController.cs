@@ -43,7 +43,7 @@ namespace Crx.vNext.API.Controllers
             }
             else
             {
-                aaa = "123";
+                aaa = SnowflakeID.NextId().ToString();
                 await _redis.StringSetAsync("aaa", aaa);
             }
             return Ok(aaa);
@@ -58,7 +58,7 @@ namespace Crx.vNext.API.Controllers
             _logger.LogWarning(JsonHelper.Serialize(new { a = '啊', b = new[] { '是', '的' } }));
             _logger.LogWarning(JsonSerializer.Serialize(new { a = '啊', b = new[] { '是', '的' } }));
             _logger.LogWarning(JsonHelper.Serialize(MessageResponse.Ok(new { a = DateTime.Now, b = "中文测试" })));
-            return MessageResponse.Ok(DateTime.Now + "中文测试");
+            return MessageResponse.Ok(MessageResponse.Ok(new { a = DateTime.Now, b = "中文测试",id = SnowflakeID.NextId() }));
         }
 
         // POST api/Test

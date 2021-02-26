@@ -1,4 +1,4 @@
-﻿using Crx.vNext.Common.Base;
+﻿using Crx.vNext.Common.Helper;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using StackExchange.Redis;

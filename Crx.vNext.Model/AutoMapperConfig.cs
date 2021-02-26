@@ -7,7 +7,7 @@ namespace Crx.vNext.Model
     /// <summary>
     /// AutoMapper映射配置
     /// </summary>
-    public class AutoMapperConfig: MapperConfigurationExpression
+    public class AutoMapperConfig : MapperConfigurationExpression
     {
         public AutoMapperConfig()
         {

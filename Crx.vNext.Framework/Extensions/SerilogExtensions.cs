@@ -9,7 +9,7 @@ namespace Crx.vNext.Framework.Extensions
     /// </summary>
     public static class SerilogExtensions
     {
-        public static void AddSerilogSetup(this IConfiguration configuration)
+        public static void AddSerilogSetup(IConfiguration configuration)
         {
             Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
         }

@@ -9,4 +9,8 @@
     <ProjectReference Include="..\Crx.vNext.Model\Crx.vNext.Model.csproj" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy $(SolutionDir)Crx.vNext.Repository\bin\Debug\netstandard2.0\Crx.vNext.Repository.dll $(SolutionDir)Crx.vNext.API\bin\Debug\net6.0\Crx.vNext.Repository.dll&#xD;&#xA;copy $(SolutionDir)Crx.vNext.Repository\bin\Debug\netstandard2.0\Crx.vNext.Repository.pdb $(SolutionDir)Crx.vNext.API\bin\Debug\net6.0\Crx.vNext.Repository.pdb&#xD;&#xA;copy $(SolutionDir)Crx.vNext.Repository\bin\Debug\netstandard2.0\Crx.vNext.Repository.deps.json $(SolutionDir)Crx.vNext.API\bin\Debug\net6.0\Crx.vNext.Repository.deps.json" />
+  </Target>
+
 </Project>

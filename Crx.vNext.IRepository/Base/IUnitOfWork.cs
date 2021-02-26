@@ -10,9 +10,9 @@ namespace Crx.vNext.IRepository.Base
     /// </summary>
     public interface IUnitOfWork: IDisposable
     {
-        IDbConnection GetConnection();
+        IDbConnection DbConnection { get; }
 
-        IDbTransaction GetTransaction();
+        IDbTransaction DbTransaction { get; }
 
         /// <summary>
         /// 开启事务

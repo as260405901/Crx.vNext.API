@@ -20,3 +20,5 @@
 /Crx.vNext.Model/Crx.vNext.Model.xml
 /Crx.vNext.Repository/obj
 /Crx.vNext.Service/obj
+/Crx.vNext.Repository/bin/Debug/netstandard2.0
+/Crx.vNext.Service/bin/Debug/netstandard2.0
