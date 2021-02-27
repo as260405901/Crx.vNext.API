@@ -39,6 +39,8 @@ namespace Crx.vNext.API
             services.AddServerOptionsSetup();
             services.AddAutoMapperSetup(); 
             services.AddSwaggerSetup();
+            services.AddCorsSetup();
+            services.AddSessionSetup();
             services.AddControllerSetup();
             // Transient Scoped Singleton
         }
@@ -71,10 +73,16 @@ namespace Crx.vNext.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwaggerSetup();
             }
-            app.UseSwaggerSetup();
+            else
+            {
+                // app.UseExceptionHandler("/Home/Error");
+                // app.UseHttpsRedirection();
+            }
 
-            //app.UseHttpsRedirection();
+
+            app.UseCorsSetup();
 
             app.UseStaticFiles();
             // б╥си
@@ -85,6 +93,8 @@ namespace Crx.vNext.API
             //app.UseAuthorization();
 
             app.UseSerilogSetup();
+
+            app.UseSessionSetup();
 
             app.UseEndpoints(endpoints =>
             {
