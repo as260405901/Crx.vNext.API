@@ -35,10 +35,12 @@ namespace Crx.vNext.API
             SerilogExtensions.AddSerilogSetup(Configuration);
 
             /*** 注入各类服务 ***/
+            //services.AddHttpContextAccessor();
             services.AddRedisSetup().Wait();
             services.AddServerOptionsSetup();
-            services.AddAutoMapperSetup(); 
+            services.AddAutoMapperSetup();
             services.AddSwaggerSetup();
+            services.AddMiniProfilerSetup();
             services.AddCorsSetup();
             services.AddSessionSetup();
             services.AddControllerSetup();
@@ -73,7 +75,6 @@ namespace Crx.vNext.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwaggerSetup();
             }
             else
             {
@@ -82,13 +83,16 @@ namespace Crx.vNext.API
             }
 
 
-            app.UseCorsSetup();
 
             app.UseStaticFiles();
+            app.UseMiniProfilerSetup();
+            app.UseSwaggerSetup();
+
+            app.UseCorsSetup();
             // 路由
             app.UseRouting();
             // 先开启认证
-            ///app.UseAuthentication();
+            //app.UseAuthentication();
             // 然后是授权中间件
             //app.UseAuthorization();
 

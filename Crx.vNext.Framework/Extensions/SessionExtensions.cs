@@ -1,8 +1,8 @@
 ﻿using Crx.vNext.Common.Helper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 using System;
-using System.Linq;
 
 namespace Crx.vNext.Framework.Extensions
 {
@@ -13,14 +13,17 @@ namespace Crx.vNext.Framework.Extensions
     {
         public static void AddSessionSetup(this IServiceCollection services)
         {
-            if(Appsettings.GetBool(new[] { "SystemFrame", "AllowSession" }) ?? false)
+            if(Appsettings.GetBool(new[] { "SystemFrame", "EnabledSession" }) ?? false)
             {
                 if (Appsettings.GetBool(new[] { "Redis", "Enabled" }) ?? false)
                 {
                     services.AddStackExchangeRedisCache(o =>
                     {
                         o.Configuration = Appsettings.GetString(new[] { "Redis", "Connection" });
-                        o.ConfigurationOptions.ClientName = Appsettings.GetString(new[] { "Redis", "ClientName" })+"Session:";
+                        o.ConfigurationOptions = new ConfigurationOptions
+                        {
+                            ClientName = Appsettings.GetString(new[] { "Redis", "ClientName" }) + "Session:"
+                        };
                     });
                 }
                 else
@@ -38,7 +41,7 @@ namespace Crx.vNext.Framework.Extensions
 
         public static void UseSessionSetup(this IApplicationBuilder app)
         {
-            if (Appsettings.GetBool(new[] { "SystemFrame", "AllowSession" }) ?? false)
+            if (Appsettings.GetBool(new[] { "SystemFrame", "EnabledSession" }) ?? false)
             {
                 app.UseSession();
             }

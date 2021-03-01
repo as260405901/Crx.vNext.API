@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
+using System.Reflection;
 
 namespace Crx.vNext.Framework.Extensions
 {
@@ -54,6 +55,7 @@ namespace Crx.vNext.Framework.Extensions
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
+                c.IndexStream = () => Assembly.GetExecutingAssembly().GetManifestResourceStream("Crx.vNext.Framework.Swagger.index.html");
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Crx.vNext.API V1");
                 c.RoutePrefix = "Swagger";// 接口文档访问路径，为空时表示根路径
             });

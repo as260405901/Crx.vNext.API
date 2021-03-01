@@ -13,7 +13,7 @@ namespace Crx.vNext.Framework.Extensions
         public static void AddServerOptionsSetup(this IServiceCollection services)
         {
             // 是否开启同步
-            if (Appsettings.GetBool(new[] { "SystemFrame", "AllowSync" }) ?? false)
+            if (Appsettings.GetBool(new[] { "SystemFrame", "EnabledSync" }) ?? false)
             {
                 services.Configure<KestrelServerOptions>(x => x.AllowSynchronousIO = true)
                         .Configure<IISServerOptions>(x => x.AllowSynchronousIO = true);
