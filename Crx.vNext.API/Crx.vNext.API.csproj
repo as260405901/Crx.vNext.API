@@ -30,8 +30,14 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy $(SolutionDir)Crx.vNext.Repository\bin\Debug\netstandard2.0\Crx.vNext.Repository.dll $(SolutionDir)Crx.vNext.API\bin\Debug\net6.0\Crx.vNext.Repository.dll /Y&#xD;&#xA;copy $(SolutionDir)Crx.vNext.Repository\bin\Debug\netstandard2.0\Crx.vNext.Repository.pdb $(SolutionDir)Crx.vNext.API\bin\Debug\net6.0\Crx.vNext.Repository.pdb /Y&#xD;&#xA;copy $(SolutionDir)Crx.vNext.Repository\bin\Debug\netstandard2.0\Crx.vNext.Repository.deps.json $(SolutionDir)Crx.vNext.API\bin\Debug\net6.0\Crx.vNext.Repository.deps.json /Y&#xD;&#xA;copy $(SolutionDir)Crx.vNext.Service\bin\Debug\netstandard2.0\Crx.vNext.Service.dll $(SolutionDir)Crx.vNext.API\bin\Debug\net6.0\Crx.vNext.Service.dll /Y&#xD;&#xA;copy $(SolutionDir)Crx.vNext.Service\bin\Debug\netstandard2.0\Crx.vNext.Service.pdb $(SolutionDir)Crx.vNext.API\bin\Debug\net6.0\Crx.vNext.Service.pdb /Y&#xD;&#xA;copy $(SolutionDir)Crx.vNext.Service\bin\Debug\netstandard2.0\Crx.vNext.Service.deps.json $(SolutionDir)Crx.vNext.API\bin\Debug\net6.0\Crx.vNext.Service.deps.json /Y&#xD;&#xA;" />
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="cd $(SolutionDir)Crx.vNext.Repository&#xD;&#xA;dotnet msbuild&#xD;&#xA;cd $(SolutionDir)Crx.vNext.Service&#xD;&#xA;dotnet msbuild" />
   </Target>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+  	<Exec Command="copy $(SolutionDir)Crx.vNext.Repository\bin\Debug\netstandard2.0\Crx.vNext.Repository.dll $(SolutionDir)Crx.vNext.API\bin\Debug\net6.0\Crx.vNext.Repository.dll /Y&#xD;&#xA;copy $(SolutionDir)Crx.vNext.Repository\bin\Debug\netstandard2.0\Crx.vNext.Repository.pdb $(SolutionDir)Crx.vNext.API\bin\Debug\net6.0\Crx.vNext.Repository.pdb /Y&#xD;&#xA;copy $(SolutionDir)Crx.vNext.Repository\bin\Debug\netstandard2.0\Crx.vNext.Repository.deps.json $(SolutionDir)Crx.vNext.API\bin\Debug\net6.0\Crx.vNext.Repository.deps.json /Y&#xD;&#xA;copy $(SolutionDir)Crx.vNext.Service\bin\Debug\netstandard2.0\Crx.vNext.Service.dll $(SolutionDir)Crx.vNext.API\bin\Debug\net6.0\Crx.vNext.Service.dll /Y&#xD;&#xA;copy $(SolutionDir)Crx.vNext.Service\bin\Debug\netstandard2.0\Crx.vNext.Service.pdb $(SolutionDir)Crx.vNext.API\bin\Debug\net6.0\Crx.vNext.Service.pdb /Y&#xD;&#xA;copy $(SolutionDir)Crx.vNext.Service\bin\Debug\netstandard2.0\Crx.vNext.Service.deps.json $(SolutionDir)Crx.vNext.API\bin\Debug\net6.0\Crx.vNext.Service.deps.json /Y&#xD;&#xA;" />
+  </Target>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

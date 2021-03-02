@@ -35,7 +35,7 @@ namespace Crx.vNext.API.Controllers
             _userService = userService;
         }
 
-        // Get api/Test
+        // Get api/Test/GetSnowflakeID
         [Route("GetSnowflakeID")]
         [HttpGet]
         public async Task<MessageResponse> GetSnowflakeID()

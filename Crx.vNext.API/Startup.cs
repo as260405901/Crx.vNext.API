@@ -87,9 +87,7 @@ namespace Crx.vNext.API
                 // app.UseHttpsRedirection();
             }
 
-
-
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
             app.UseMiniProfilerSetup();
             app.UseSwaggerSetup();
 
@@ -109,6 +107,9 @@ namespace Crx.vNext.API
             {
                 endpoints.MapControllers();
             });
+
+            // 这些不是中间件
+            app.ConsulRegister();
         }
     }
 }

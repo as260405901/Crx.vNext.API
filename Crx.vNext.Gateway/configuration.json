@@ -1,0 +1,42 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/{url}", //服务地址--url变量
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/T/{url}", //网关地址--url变量
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "UseServiceDiscovery": true,
+      "ServiceName": "Group1", //consul服务名称
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin" //轮询      LeastConnection-最少连接数的服务器   NoLoadBalance不负载均衡
+      },
+      //"FileCacheOptions": {
+      //  "TtlSeconds": 10
+      //} //"缓存"
+      "RateLimitOptions": {
+        "ClientWhitelist": [], //白名单
+        "EnableRateLimiting": true,
+        "Period": "1s", //1s, 5m, 1h, 1d
+        "PeriodTimespan": 5, //多少秒之后客户端可以重试
+        "Limit": 1000000 //统计时间段内允许的最大请求数量
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3, //允许多少个异常请求
+        "DurationOfBreak": 10000, // 熔断的时间，单位为ms
+        "TimeoutValue": 10000 //如果下游请求的处理时间超过多少则自如将请求设置为超时 默认90秒
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000", //网关对外地址
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul" //由Consul提供服务发现
+    },
+    "RateLimitOptions": {
+      "QuotaExceededMessage": "RateLimit！！！", // 当请求过载被截断时返回的消息
+      "HttpStatusCode": 666 // 当请求过载被截断时返回的http status
+    }
+  }
+}
