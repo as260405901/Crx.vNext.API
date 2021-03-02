@@ -12,6 +12,7 @@ using Crx.vNext.Common.Base;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using StackExchange.Redis;
+using Crx.vNext.IService;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,49 +25,24 @@ namespace Crx.vNext.API.Controllers
         private readonly IMapper _mapper;
         private readonly ILogger<TestController> _logger;
         private readonly IDatabase _redis;
+        private readonly IUserService _userService;
 
-        public TestController(ILogger<TestController> logger, IMapper mapper, IDatabase redis)
+        public TestController(ILogger<TestController> logger, IMapper mapper, IDatabase redis, IUserService userService)
         {
             _logger = logger;
             _mapper = mapper;
             _redis = redis;
+            _userService = userService;
         }
-        // GET: api/Test
+
+        // Get api/Test
+        [Route("GetSnowflakeID")]
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<MessageResponse> GetSnowflakeID()
         {
-            var key = "aaa";
-            string aaa;            
-            if (await _redis.KeyExistsAsync(key))
-            {
-                aaa = await _redis.StringGetAsync("aaa");
-            }
-            else
-            {
-                aaa = SnowflakeID.NextId().ToString();
-                await _redis.StringSetAsync("aaa", aaa);
-            }
-            return Ok(aaa);
+            return MessageResponse.Ok(SnowflakeID.NextId());
         }
 
-        // GET api/Test/5
-        [HttpGet("{id}")]
-        public async Task<MessageResponse> Get(int id)
-        {
-            _logger.LogWarning(DateTime.Now + "中文测试");
-            _logger.LogWarning(JsonHelper.Serialize(new { a = DateTime.Now, b = "中文测试" }));
-            _logger.LogWarning(JsonHelper.Serialize(new { a = '啊', b = new[] { '是', '的' } }));
-            _logger.LogWarning(JsonSerializer.Serialize(new { a = '啊', b = new[] { '是', '的' } }));
-            _logger.LogWarning(JsonHelper.Serialize(MessageResponse.Ok(new { a = DateTime.Now, b = "中文测试" })));
-            return MessageResponse.Ok(MessageResponse.Ok(new { a = DateTime.Now, b = "中文测试",id = SnowflakeID.NextId() }));
-        }
-
-        // POST api/Test
-        [HttpPost]
-        public async Task<string> Post(InputModel<int> model)
-        {
-            return _mapper.Map<InputModel<ApprovalStatusEnum>>(model).Data.GetDescription();
-        }
 
         // PUT api/Test/5
         [HttpPut("{id}")]
@@ -78,6 +54,39 @@ namespace Crx.vNext.API.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        [Route("Redis")]
+        [HttpGet]
+        public async Task<MessageResponse> Redis()
+        {
+            var key = "aaa";
+            string aaa = await _redis.StringGetAsync("aaa");
+            if (aaa == null)
+            {
+                aaa = SnowflakeID.NextId().ToString();
+                await _redis.StringSetAsync("aaa", aaa);
+            }
+            return MessageResponse.Ok(aaa);
+        }
+
+        [Route("Encoder")]
+        [HttpGet()]
+        public async Task<MessageResponse> Encoder()
+        {
+            _logger.LogWarning(DateTime.Now + "中文测试");
+            _logger.LogWarning(JsonHelper.Serialize(new { a = DateTime.Now, b = "中文测试" }));
+            _logger.LogWarning(JsonHelper.Serialize(new { a = '啊', b = new[] { '是', '的' } }));
+            _logger.LogWarning(JsonSerializer.Serialize(new { a = '啊', b = new[] { '是', '的' } }));
+            _logger.LogWarning(JsonHelper.Serialize(MessageResponse.Ok(new { a = DateTime.Now, b = "中文测试" })));
+            return MessageResponse.Ok(MessageResponse.Ok(new { a = DateTime.Now, b = "中文测试", id = SnowflakeID.NextId() }));
+        }
+
+        [Route("AutoMapper")]
+        [HttpPost]
+        public async Task<MessageResponse> AutoMapper(InputModel<int> model)
+        {
+            return MessageResponse.Ok(_mapper.Map<InputModel<ApprovalStatusEnum>>(model).Data.GetDescription());
         }
     }
 }

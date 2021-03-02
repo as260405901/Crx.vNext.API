@@ -1,5 +1,7 @@
 using Autofac;
+using Autofac.Extras.DynamicProxy;
 using Crx.vNext.Common.Helper;
+using Crx.vNext.Framework.AOP;
 using Crx.vNext.Framework.Extensions;
 using Crx.vNext.IRepository.Base;
 using Microsoft.AspNetCore.Builder;
@@ -53,16 +55,19 @@ namespace Crx.vNext.API
             builder.RegisterType<SqlConnection>().As<IDbConnection>()
                 .WithParameter("connectionString", Configuration.GetConnectionString("WriteConnection"));
 
-            
+            var aopType = builder.GetAopList();
+
             //注册要通过反射创建的组件
             var assemblyService = Assembly.LoadFrom(Path.Combine(AppContext.BaseDirectory, "Crx.vNext.Service.dll"));
             builder.RegisterAssemblyTypes(assemblyService)
                 .AsImplementedInterfaces() // 接口注入
-                .InstancePerDependency(); // 每次都是新实例
+                .InstancePerDependency() // 每次都是新实例
+                .EnableInterfaceInterceptors().InterceptedBy(aopType); 
             var assemblyRepository = Assembly.LoadFrom(Path.Combine(AppContext.BaseDirectory, "Crx.vNext.Repository.dll"));
             builder.RegisterAssemblyTypes(assemblyRepository)
                 .AsImplementedInterfaces()
-                .InstancePerDependency();
+                .InstancePerDependency()
+                .EnableInterfaceInterceptors().InterceptedBy(aopType);
             //builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerDependency();//泛型注入            
 
             // 工作单元注入为Scope，放在反射注入之后

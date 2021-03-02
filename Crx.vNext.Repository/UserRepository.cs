@@ -24,5 +24,10 @@ namespace Crx.vNext.Repository
         {
             return _unitOfWork.DbConnection.GetList<UserInfo>();
         }
+
+        public UserInfo GetModel(long id)
+        {
+            return _unitOfWork.DbConnection.Get<UserInfo>(id);
+        }
     }
 }

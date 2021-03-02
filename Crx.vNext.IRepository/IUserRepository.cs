@@ -9,5 +9,6 @@ namespace Crx.vNext.IRepository
     public interface IUserRepository
     {
         IEnumerable<UserInfo> GetList();
+        UserInfo GetModel(long id);
     }
 }
