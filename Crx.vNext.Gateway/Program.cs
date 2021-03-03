@@ -24,7 +24,8 @@ namespace Crx.vNext.Gateway
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>()
+                        .UseUrls("http://*:42847");
                 });
     }
 }

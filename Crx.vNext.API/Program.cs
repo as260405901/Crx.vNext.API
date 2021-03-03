@@ -18,7 +18,8 @@ namespace Crx.vNext.API
                 .UseSerilog() // ¼¯³ÉSerilog
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>()
+                    .UseUrls("http://*:17687");
                 });
     }
 }

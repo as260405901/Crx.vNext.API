@@ -30,6 +30,10 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
+  </ItemGroup>
+
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="cd $(SolutionDir)Crx.vNext.Repository&#xD;&#xA;dotnet msbuild&#xD;&#xA;cd $(SolutionDir)Crx.vNext.Service&#xD;&#xA;dotnet msbuild" />
   </Target>

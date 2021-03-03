@@ -20,6 +20,10 @@
         "PeriodTimespan": 5, //多少秒之后客户端可以重试
         "Limit": 1000000 //统计时间段内允许的最大请求数量
       },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      },
       "QoSOptions": {
         "ExceptionsAllowedBeforeBreaking": 3, //允许多少个异常请求
         "DurationOfBreak": 10000, // 熔断的时间，单位为ms
@@ -28,7 +32,7 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5000", //网关对外地址
+    "BaseUrl": "http://localhost:42847", //网关对外地址
     "ServiceDiscoveryProvider": {
       "Host": "localhost",
       "Port": 8500,
