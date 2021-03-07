@@ -23,6 +23,8 @@
 /Crx.vNext.Service/obj
 /Crx.vNext.Authentication/bin
 /Crx.vNext.Authentication/obj
+/Crx.vNext.Authentication/log
 /Crx.vNext.Gateway/bin
 /Crx.vNext.Gateway/obj
+/ConsoleToken/bin
 /ConsoleToken/obj

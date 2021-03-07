@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Crx.vNext.Common.Base;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
-using StackExchange.Redis;
 using Crx.vNext.IService;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -24,14 +23,12 @@ namespace Crx.vNext.API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ILogger<TestController> _logger;
-        private readonly IDatabase _redis;
         private readonly IUserService _userService;
 
-        public TestController(ILogger<TestController> logger, IMapper mapper, IDatabase redis, IUserService userService)
+        public TestController(ILogger<TestController> logger, IMapper mapper, IUserService userService)
         {
             _logger = logger;
             _mapper = mapper;
-            _redis = redis;
             _userService = userService;
         }
 
@@ -54,20 +51,6 @@ namespace Crx.vNext.API.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-        }
-
-        [Route("Redis")]
-        [HttpGet]
-        public async Task<MessageResponse> Redis()
-        {
-            var key = "aaa";
-            string aaa = await _redis.StringGetAsync("aaa");
-            if (aaa == null)
-            {
-                aaa = SnowflakeID.NextId().ToString();
-                await _redis.StringSetAsync("aaa", aaa);
-            }
-            return MessageResponse.Ok(aaa);
         }
 
         [Route("Encoder")]

@@ -16,6 +16,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crx.vNext.Service", "Crx.vNext.Service\Crx.vNext.Service.csproj", "{D988ADAA-593D-4ABE-B97A-47A5139A2E3D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.Base", "0.Base", "{70905945-E3CA-45D3-9F4D-DA4870D6444C}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Model", "1.Model", "{2D29F544-6611-46DF-9A52-92F058903BEE}"
 EndProject
@@ -33,7 +36,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crx.vNext.Gateway", "Crx.vN
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crx.vNext.Authentication", "Crx.vNext.Authentication\Crx.vNext.Authentication.csproj", "{011FE058-AA94-4D84-BDE5-BFC0F417ACF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleToken", "ConsoleToken\ConsoleToken.csproj", "{EC2B8947-5259-4277-A33F-F89880913D68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleToken", "ConsoleToken\ConsoleToken.csproj", "{EC2B8947-5259-4277-A33F-F89880913D68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
