@@ -22,7 +22,7 @@
 配置中心、Elasticsearch(分布式搜索分析引擎)、SkyAPM(分布式链路追踪)、Polloy(瞬态故障处理)、RabbitMQ(消息队列)、NCC.CAP(分布式定理)、数据库读写分离
 
 ##系统架构
-![系统架构](/as260405901/Crx.vNext.API/blob/main/Other/Framework.png?raw=true)
+![系统架构](https://raw.githubusercontent.com/as260405901/Crx.vNext.API/main/Other/Framework.png)
 
 ## Docker 环境基础镜像
 ``` bash
@@ -41,27 +41,47 @@ Nginx			docker pull nginx
 docker network create --subnet=172.172.0.0/16 Crx.vNext.Network
 ```
 网络划分： 
-&emsp;&emsp;Web服务：172.172.1.0~172.172.100.254
-&emsp;&emsp;基础服务：172.172.101.0~172.172.150.254
-&emsp;&emsp;其他服务：172.172.151.0~172.172.200.254
-&emsp;&emsp;注：每组服务站独立一组网段（内部包含web服务及其独立使用的其他服务地址），剩余网段预留
+&nbsp;&nbsp;&nbsp;&nbsp;
+Web服务：172.172.1.0~172.172.100.254
+&nbsp;&nbsp;&nbsp;&nbsp;
+基础服务：172.172.101.0~172.172.150.254
+&nbsp;&nbsp;&nbsp;&nbsp;
+其他服务：172.172.151.0~172.172.200.254
+&nbsp;&nbsp;&nbsp;&nbsp;
+注：每组服务站独立一组网段（内部包含web服务及其独立使用的其他服务地址），剩余网段预留
 具体分配：
-&emsp;&emsp;Web服务：
-&emsp;&emsp;&emsp;&emsp;ServiceA_Api*：172.172.1.*
-&emsp;&emsp;&emsp;&emsp;ServiceB_Api*：172.172.2.*
-&emsp;&emsp;&emsp;&emsp;ServiceC_Api*：172.172.3.*
-&emsp;&emsp;Redis：
-&emsp;&emsp;&emsp;&emsp;Redis*：172.172.101.*
-&emsp;&emsp;&emsp;Consul：
-&emsp;&emsp;&emsp;&emsp;Consul_Server*：172.172.102.*
-&emsp;&emsp;&emsp;&emsp;Consul_Client*：172.172.103.*
-&emsp;&emsp;Nginx：
-&emsp;&emsp;Consul*：172.172.104.1~172.172.104.50
-&emsp;&emsp;&emsp;&emsp;Gateway*：172.172.104.51~172.172.104.100
-&emsp;&emsp;Authentication：
-&emsp;&emsp;&emsp;&emsp;Ids4_*：172.172.105.*
-&emsp;&emsp;Gateway：
-&emsp;&emsp;&emsp;&emsp;Ocelot*：172.172.106.*       
+&nbsp;&nbsp;&nbsp;&nbsp;
+Web服务：
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ServiceA_Api*：172.172.1.*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ServiceB_Api*：172.172.2.*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ServiceC_Api*：172.172.3.*
+&nbsp;&nbsp;&nbsp;&nbsp;
+Redis：
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Redis*：172.172.101.*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Consul：
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Consul_Server*：172.172.102.*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Consul_Client*：172.172.103.*
+&nbsp;&nbsp;&nbsp;&nbsp;
+Nginx：
+&nbsp;&nbsp;&nbsp;&nbsp;
+Consul*：172.172.104.1~172.172.104.50
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Gateway*：172.172.104.51~172.172.104.100
+&nbsp;&nbsp;&nbsp;&nbsp;
+Authentication：
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Ids4_*：172.172.105.*
+&nbsp;&nbsp;&nbsp;&nbsp;
+Gateway：
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Ocelot*：172.172.106.*       
 #### 2.创建 Docker 镜像：
 ``` bash
 docker build -t crx.vnext.api -f Dockerfile .
