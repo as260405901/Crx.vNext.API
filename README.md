@@ -41,47 +41,27 @@ Nginx			docker pull nginx
 docker network create --subnet=172.172.0.0/16 Crx.vNext.Network
 ```
 网络划分： 
-&nbsp;&nbsp;&nbsp;&nbsp;
-Web服务：172.172.1.0~172.172.100.254
-&nbsp;&nbsp;&nbsp;&nbsp;
-基础服务：172.172.101.0~172.172.150.254
-&nbsp;&nbsp;&nbsp;&nbsp;
-其他服务：172.172.151.0~172.172.200.254
-&nbsp;&nbsp;&nbsp;&nbsp;
-注：每组服务站独立一组网段（内部包含web服务及其独立使用的其他服务地址），剩余网段预留
+    Web服务：172.172.1.0~172.172.100.254
+    基础服务：172.172.101.0~172.172.150.254
+    其他服务：172.172.151.0~172.172.200.254
+    注：每组服务站独立一组网段（内部包含web服务及其独立使用的其他服务地址），剩余网段预留
 具体分配：
-&nbsp;&nbsp;&nbsp;&nbsp;
-Web服务：
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-ServiceA_Api*：172.172.1.*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-ServiceB_Api*：172.172.2.*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-ServiceC_Api*：172.172.3.*
-&nbsp;&nbsp;&nbsp;&nbsp;
-Redis：
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Redis*：172.172.101.*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Consul：
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Consul_Server*：172.172.102.*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Consul_Client*：172.172.103.*
-&nbsp;&nbsp;&nbsp;&nbsp;
-Nginx：
-&nbsp;&nbsp;&nbsp;&nbsp;
-Consul*：172.172.104.1~172.172.104.50
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Gateway*：172.172.104.51~172.172.104.100
-&nbsp;&nbsp;&nbsp;&nbsp;
-Authentication：
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Ids4_*：172.172.105.*
-&nbsp;&nbsp;&nbsp;&nbsp;
-Gateway：
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Ocelot*：172.172.106.*       
+    Web服务：
+        ServiceA_Api*：172.172.1.*
+        ServiceB_Api*：172.172.2.*
+        ServiceC_Api*：172.172.3.*
+    Redis：
+        Redis*：172.172.101.*
+    Consul：
+        Consul_Server*：172.172.102.*
+        Consul_Client*：172.172.103.*
+    Nginx：
+        Consul*：172.172.104.1~172.172.104.50
+        Gateway*：172.172.104.51~172.172.104.100
+    Authentication：
+        Ids4_*：172.172.105.*
+    Gateway：
+        Ocelot*：172.172.106.*       
 #### 2.创建 Docker 镜像：
 ``` bash
 docker build -t crx.vnext.api -f Dockerfile .
