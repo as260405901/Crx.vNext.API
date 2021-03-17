@@ -16,13 +16,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crx.vNext.Service", "Crx.vNext.Service\Crx.vNext.Service.csproj", "{D988ADAA-593D-4ABE-B97A-47A5139A2E3D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.Base", "0.Base", "{70905945-E3CA-45D3-9F4D-DA4870D6444C}"
-	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Model", "1.Model", "{2D29F544-6611-46DF-9A52-92F058903BEE}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Repository", "2.Repository", "{5D639F68-0C2D-415A-9691-40FA97CFEEF5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Service", "3.Service", "{50CB6059-7782-42A7-A0AB-F0CFF84ED2AE}"
 EndProject
@@ -37,6 +32,39 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crx.vNext.Authentication", "Crx.vNext.Authentication\Crx.vNext.Authentication.csproj", "{011FE058-AA94-4D84-BDE5-BFC0F417ACF4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleToken", "ConsoleToken\ConsoleToken.csproj", "{EC2B8947-5259-4277-A33F-F89880913D68}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "99.Config", "99.Config", "{50A2BEEC-69DE-4ABD-80A8-F58268139258}"
+	ProjectSection(SolutionItems) = preProject
+		D:\User\Desktop\docker-compose.yml = D:\User\Desktop\docker-compose.yml
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{0B5773A7-85DD-4F70-978D-1AEFFD7E16EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceA", "ServiceA", "{95C740D2-416C-4583-A97B-3F11ABBC4A50}"
+	ProjectSection(SolutionItems) = preProject
+		Config\Api\ServiceA\appsettings1.json = Config\Api\ServiceA\appsettings1.json
+		Config\Api\ServiceA\appsettings2.json = Config\Api\ServiceA\appsettings2.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceB", "ServiceB", "{52881ABB-948A-4E6E-A421-57CE21D7D2F7}"
+	ProjectSection(SolutionItems) = preProject
+		Config\Api\ServiceB\appsettings1.json = Config\Api\ServiceB\appsettings1.json
+		Config\Api\ServiceB\appsettings2.json = Config\Api\ServiceB\appsettings2.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{2F8AAEB0-9426-4925-B497-8F6343DED54A}"
+	ProjectSection(SolutionItems) = preProject
+		Config\Gateway\configuration.json = Config\Gateway\configuration.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nginx", "Nginx", "{8CF34D9A-2519-4AB4-BED7-ED7830CD20C3}"
+	ProjectSection(SolutionItems) = preProject
+		Config\Nginx\nginx-consul.conf = Config\Nginx\nginx-consul.conf
+		Config\Nginx\nginx-gateway.conf = Config\Nginx\nginx-gateway.conf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Interface", "2.Interface", "{9E14D5A7-153D-4009-BB99-77712968DD5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,12 +122,17 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B1169526-A668-4892-A5F1-58043B4018B4} = {2D29F544-6611-46DF-9A52-92F058903BEE}
-		{9B9099B4-EA91-485B-845F-2AD1D3215F1D} = {5D639F68-0C2D-415A-9691-40FA97CFEEF5}
-		{0B1E78E6-4E8F-4BBB-844B-A8DC2983E9A8} = {5D639F68-0C2D-415A-9691-40FA97CFEEF5}
-		{09895182-184C-479A-92CB-F098D9DFBE89} = {50CB6059-7782-42A7-A0AB-F0CFF84ED2AE}
+		{9B9099B4-EA91-485B-845F-2AD1D3215F1D} = {9E14D5A7-153D-4009-BB99-77712968DD5D}
+		{0B1E78E6-4E8F-4BBB-844B-A8DC2983E9A8} = {50CB6059-7782-42A7-A0AB-F0CFF84ED2AE}
+		{09895182-184C-479A-92CB-F098D9DFBE89} = {9E14D5A7-153D-4009-BB99-77712968DD5D}
 		{D988ADAA-593D-4ABE-B97A-47A5139A2E3D} = {50CB6059-7782-42A7-A0AB-F0CFF84ED2AE}
 		{CF77C791-77F4-45AF-A291-3946448CDA67} = {70905945-E3CA-45D3-9F4D-DA4870D6444C}
 		{68C2766F-6847-4A4F-86ED-ED8385EA3FF4} = {59D5A9FE-702C-4A55-A334-6A7172ED8944}
+		{0B5773A7-85DD-4F70-978D-1AEFFD7E16EF} = {50A2BEEC-69DE-4ABD-80A8-F58268139258}
+		{95C740D2-416C-4583-A97B-3F11ABBC4A50} = {0B5773A7-85DD-4F70-978D-1AEFFD7E16EF}
+		{52881ABB-948A-4E6E-A421-57CE21D7D2F7} = {0B5773A7-85DD-4F70-978D-1AEFFD7E16EF}
+		{2F8AAEB0-9426-4925-B497-8F6343DED54A} = {50A2BEEC-69DE-4ABD-80A8-F58268139258}
+		{8CF34D9A-2519-4AB4-BED7-ED7830CD20C3} = {50A2BEEC-69DE-4ABD-80A8-F58268139258}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {475D60DB-4A9F-478E-B00B-BE46935B8E7A}

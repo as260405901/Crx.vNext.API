@@ -1,11 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Crx.vNext.Gateway
 {
@@ -24,8 +19,8 @@ namespace Crx.vNext.Gateway
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>()
-                        .UseUrls("http://*:42847");
+                    webBuilder.UseStartup<Startup>();
+                    // 命令行使用参数指定端口 --urls http://*:42847
                 });
     }
 }

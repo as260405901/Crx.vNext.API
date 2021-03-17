@@ -25,17 +25,15 @@ namespace Crx.vNext.Gateway
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            Action<JwtBearerOptions> options = o =>
-            {
-                o.Authority = "http://localhost:30032";
-                o.RequireHttpsMetadata = false;
-                o.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateAudience = false,
-                };
-            };
-
-            services.AddAuthentication("Bearer").AddJwtBearer("TestKey", options);
+            //services.AddAuthentication("Bearer").AddJwtBearer("TestKey", o =>
+            //{
+            //    o.Authority = "http://localhost:30032";
+            //    o.RequireHttpsMetadata = false;
+            //    o.TokenValidationParameters = new TokenValidationParameters
+            //    {
+            //        ValidateAudience = false,
+            //    };
+            //});
 
             services.AddOcelot().AddConsul().AddPolly();//.AddAdministration("/administration", options); 
         }

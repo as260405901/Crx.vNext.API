@@ -1,15 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Serilog;
 
 namespace Crx.vNext.Authentication
 {
@@ -25,6 +19,7 @@ namespace Crx.vNext.Authentication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(Configuration).CreateLogger();
             // uncomment, if you want to add an MVC-based UI
             //services.AddControllersWithViews();
 
@@ -37,7 +32,6 @@ namespace Crx.vNext.Authentication
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryClients(Config.Clients);
 
-
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
         }
@@ -49,6 +43,9 @@ namespace Crx.vNext.Authentication
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseHttpsRedirection();
+            app.UseSerilogRequestLogging(); // 需要详细日志时，将 Microsoft 设置为 Information
 
             // uncomment if you want to add MVC
             //app.UseStaticFiles();
