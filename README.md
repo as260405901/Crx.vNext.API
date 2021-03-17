@@ -40,7 +40,8 @@ Nginx			docker pull nginx
 ``` bash
 docker network create --subnet=172.172.0.0/16 Crx.vNext.Network
 ```
-网络划分： 
+``` bash
+网络划分：
     Web服务：172.172.1.0~172.172.100.254
     基础服务：172.172.101.0~172.172.150.254
     其他服务：172.172.151.0~172.172.200.254
@@ -61,7 +62,9 @@ docker network create --subnet=172.172.0.0/16 Crx.vNext.Network
     Authentication：
         Ids4_*：172.172.105.*
     Gateway：
-        Ocelot*：172.172.106.*       
+        Ocelot*：172.172.106.*
+
+```
 #### 2.创建 Docker 镜像：
 ``` bash
 docker build -t crx.vnext.api -f Dockerfile .
