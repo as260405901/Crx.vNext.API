@@ -31,25 +31,5 @@ namespace Crx.vNext.Common.Cache
             }
             return list;
         }
-
-        /// <summary>
-        /// 缓存为空时执行func方法存至缓存，否则从缓存读取
-        /// 使用方法： redis.Get(key, () => "123", 1);
-        /// </summary>
-        /// <param name="func">原始数据</param>
-        public static async Task<T> Get<T>(this IDatabase redis, string key, Func<T> func = null, int? minute = null)
-        {
-            T obj = default;
-            if (await redis.KeyExistsAsync(key))
-            {
-                obj = JsonHelper.Deserialize<T>(await redis.StringGetAsync(key));
-            }
-            else if(func != null)
-            {
-                obj = func();
-                await redis.StringSetAsync(key, JsonHelper.Serialize(obj), minute == null ? default(TimeSpan?) : TimeSpan.FromMinutes(minute.Value));
-            }
-            return obj;
-        }
     }
 }

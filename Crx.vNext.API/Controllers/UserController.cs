@@ -16,11 +16,9 @@ namespace Crx.vNext.API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IDatabase _redis;
         public IUserService _userService;
-        public UserController(IDatabase redis, IUserService userService)
+        public UserController(IUserService userService)
         {
-            _redis = redis;
             _userService = userService;
         }
 
@@ -43,11 +41,11 @@ namespace Crx.vNext.API.Controllers
         public async Task<MessageResponse> Redis()
         {
             var key = "aaa";
-            string aaa = await _redis.StringGetAsync("aaa");
+            string aaa = await RedisHelper.GetDatabase().StringGetAsync("aaa");
             if (aaa == null)
             {
                 aaa = SnowflakeID.NextId().ToString();
-                await _redis.StringSetAsync("aaa", aaa);
+                await RedisHelper.GetDatabase().StringSetAsync("aaa", aaa);
             }
             return MessageResponse.Ok(aaa);
         }

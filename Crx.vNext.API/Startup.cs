@@ -14,6 +14,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 
 namespace Crx.vNext.API
 {
@@ -31,6 +32,8 @@ namespace Crx.vNext.API
         {
             /*** 优先 ***/
             _ = new Appsettings(Configuration);
+            _ = ThreadPool.SetMinThreads(Appsettings.GetInt("SystemFrame:MinWorkerThreads") ?? 100,
+                Appsettings.GetInt("SystemFrame:MinIoThreads") ?? 100);
             _ = new SnowflakeID(new(Appsettings.GetLong("SystemFrame:Snowflake:WorkerId").Value,
                 Appsettings.GetLong("SystemFrame:Snowflake:DatacenterId").Value,
                 Appsettings.GetLong("SystemFrame:Snowflake:Sequence").Value));
@@ -38,7 +41,6 @@ namespace Crx.vNext.API
 
             /*** 注入各类服务 ***/
             //services.AddHttpContextAccessor();
-            services.AddRedisSetup().Wait();
             services.AddServerOptionsSetup();
             services.AddAutoMapperSetup();
             services.AddSwaggerSetup();
